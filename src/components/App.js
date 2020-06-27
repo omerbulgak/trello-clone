@@ -2,27 +2,29 @@ import React from 'react';
 import TrelloList from './TrelloList/TrelloList';
 import { connect } from 'react-redux';
 import ActionButton from './Button/Button'
+import { DragDropContext } from 'react-beautiful-dnd';
+import './App.css';
 
 const App = (props) => {
     const { lists } = props;
-    return(
-        <div className="App">
-            <h2>Hello Trello</h2>
-            <div style={styles.listsContainer}>
-                {lists.map(list => ( 
-                    <TrelloList listID={list.id} key={list.id} title={list.title} cards={list.cards}/>
-                ))}
-            <ActionButton list/>
-            </div>
-        </div>
-    )
-}
+    
+    const onDragEnd = () => {
 
-const styles = { 
-    listsContainer: {
-        display: "flex",
-        flexDirection: "row"
     }
+
+    return(
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div>
+                <h2>Hello Trello</h2>
+                <div className="listsContainer">
+                    {lists.map(list => ( 
+                        <TrelloList listID={list.id} key={list.id} title={list.title} cards={list.cards}/>
+                    ))}
+                <ActionButton list/>
+                </div>
+            </div>
+        </DragDropContext>
+    )
 }
 
 const mapStateToProps = state => ({
