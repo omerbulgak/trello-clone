@@ -2,27 +2,35 @@ import React from 'react';
 import './TrelloList.css'
 import TrelloCard from '../TrelloCard/TrelloCard';
 import ActionButton from '../Button/Button';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-const TrelloList = ({title, cards, listID}) => {
+const TrelloList = ({title, cards, listID, index}) => {
     return(
-        <Droppable droppableId={String(listID)}>
+        <Draggable draggableId={String(listID)} index={index}>
             {provided => (
-                <div { ...provided.droppableProps } ref={provided.innerRef} className="container">
-                    <h4>{title}</h4>
-                    {cards.map((card, index) => (
-                        <TrelloCard 
-                            key={card.id}
-                            index={index} 
-                            text={card.text} 
-                            id={card.id}
-                        />
-                    ))}
-                    <ActionButton listID={listID}/>
-                    {provided.placceholder}
+                <div className="listsContainer" {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
+                    <Droppable droppableId={String(listID)}>
+                        {provided => (
+                            <div { ...provided.droppableProps } ref={provided.innerRef} className="container">
+                                <div {...provided.droppableProps} ref={provided.innerRef}>
+                                    <h4>{title}</h4>
+                                    {cards.map((card, index) => (
+                                        <TrelloCard 
+                                            key={card.id}
+                                            index={index} 
+                                            text={card.text} 
+                                            id={card.id}
+                                        />
+                                    ))}
+                                    {provided.placceholder}
+                                    <ActionButton listID={listID}/>
+                                </div>
+                            </div>
+                        )}
+                    </Droppable>
                 </div>
             )}
-        </Droppable>
+        </Draggable>
     )
 }
 

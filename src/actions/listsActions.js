@@ -7,12 +7,13 @@ export const addList = (title) => {
     }
 }
 
-export const sort = () => (
+export const sort = (
     droppableIdStart,
     droppableIdEnd,
     droppableIndexStart,
     droppableIndexEnd,
-    draggableId
+    draggableId,
+    type
 ) => {
     return {
         type: CONSTANTS.DRAG_HAPPENED,
@@ -21,7 +22,8 @@ export const sort = () => (
             droppableIdEnd,
             droppableIndexStart,
             droppableIndexEnd,
-            draggableId
+            draggableId,
+            type
         }
     }
 }

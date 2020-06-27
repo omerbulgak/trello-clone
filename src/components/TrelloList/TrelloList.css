@@ -6,3 +6,8 @@
    padding: 8px;
    margin-right: 8px;
 }
+
+.listsContainer {
+   display: flex;
+   flex-direction: row;
+}

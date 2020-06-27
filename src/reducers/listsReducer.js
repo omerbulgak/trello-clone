@@ -8,11 +8,11 @@ const initialState = [
         id: `list-${0}`,
         cards: [
             {
-                id: 0,
+                id: `card-${0}`,
                 text: "Material UI React and CSS will be used"
             },
             {
-                id: 1,
+                id: `card-${1}`,
                 text: "Static card and list were created"
             }
         ]
@@ -73,15 +73,41 @@ const listsReducer = (state= initialState, action) => {
                 droppableIdEnd,
                 droppableIndexStart,
                 droppableIndexEnd,
-                draggableId
+                draggableId,
+                type
             } = action.payload;
-
             const newState = [...state]
+
+            // dragging list around
+
+            if(type === "list"){
+                const list = newState.splice(droppableIndexStart, 1)
+                newState.splice(droppableIndexEnd, 0, ...list)
+                return newState;
+            }
+
+            // dnd in the same list
             if(droppableIdStart === droppableIdEnd){
                 const list = state.find(list => droppableIdStart === list.id)
                 const card = list.cards.splice(droppableIndexStart, 1)
                 list.cards.splice(droppableIndexEnd, 0, ...card)
             }
+
+            // dnd between lists
+            if(droppableIdStart !== droppableIdEnd){
+                // find the list where drag happened
+                const listStart = state.find(list => droppableIdStart === list.id)
+                
+                // pull out the card from this list
+                const card = listStart.cards.splice(droppableIndexStart, 1)
+
+                // find the list where drag ended
+                const listEnd = state.find(list => droppableIdEnd === list.id)
+
+                // put the card in the new list
+                listEnd.cards.splice(droppableIndexEnd, 0, ...card)
+            }
+
             return newState;
         default:
             return state;
