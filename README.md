@@ -1,4 +1,4 @@
-** Version 0.0.7 **
+**Version 0.0.7**
 
 ### Start the Project
 
