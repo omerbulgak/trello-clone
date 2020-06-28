@@ -1,16 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+** Version 0.0.7 **
 
-## Available Scripts
+### Start the Project
 
-In the project directory, you can run:
+* Clone this repository
+* In the cloned directory, run npm install && npm start
 
-### `npm start`
+## Authors
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Omer Faruk Bulgak
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## License 
 
+This project is licensed under the MIT License
 
 
