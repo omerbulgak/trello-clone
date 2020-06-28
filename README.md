@@ -3,7 +3,7 @@
 ### Start the Project
 
 * Clone this repository
-* In the cloned directory, run npm install r && npm start r
+* In the cloned directory, run `npm install && npm start`
 
 ## Authors
 
